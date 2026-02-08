@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Rename
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
     # いらないルーティングを消去
     initializer(:remove_action_mailbox_and_activestorage_routes, after: :add_routing_paths) { |app|
       app.routes_reloader.paths.delete_if {|path| path =~ /activestorage/}
