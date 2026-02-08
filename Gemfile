@@ -42,17 +42,12 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
-  gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
 end
 
 # 本番環境用のgemグループを新しく作成しPostgresを指定
@@ -70,10 +65,6 @@ gem 'rails-i18n', '~> 7.0'
 
 gem 'pry-rails'
 
-gem 'matrix'
-gem 'net-smtp'
-gem 'net-imap'
-gem 'net-pop'
 
 # ogp設定とseo対策
 gem 'meta-tags'
