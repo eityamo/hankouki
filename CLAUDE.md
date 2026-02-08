@@ -7,8 +7,9 @@
 
 ## 技術スタック
 
-- Ruby 3.1.1 / Rails 6.1.5
-- Webpacker 5 + Tailwind CSS 2 (postcss7-compat)
+- Ruby 3.3.6 / Rails 7.1.x
+- importmap-rails + Tailwind CSS 4 (tailwindcss-rails)
+- Turbo (turbo-rails)
 - SQLite3 (dev/test) / PostgreSQL (production)
 - PDF生成: Prawn / Prawn-Table
 - デプロイ: Heroku (Docker)
@@ -18,7 +19,7 @@
 ```bash
 # サーバー起動
 bin/rails server                  # localhost:3000
-yarn dev                          # Webpack dev server (別ターミナル)
+bin/rails tailwindcss:watch       # Tailwind CSS ビルド（別ターミナル、開発時）
 
 # テスト
 bin/rails test                    # Minitest
@@ -35,12 +36,13 @@ bin/rails routes
 
 # アセット
 bin/rails assets:precompile
+bin/rails tailwindcss:build       # Tailwind CSS ビルド（単発）
 ```
 
 ## 注意事項
 
-- ローカルNodeバージョンとプロジェクト指定(.node-version: 15)が異なる場合、Webpack起動時に `NODE_OPTIONS=--openssl-legacy-provider` が必要（`yarn dev` には設定済み）
-- `Procfile` / `Procfile.dev` は存在しない。サーバーとWebpackは別ターミナルで起動する
+- Node.js は不要（importmap + tailwindcss-rails はNode非依存）
+- `Procfile` / `Procfile.dev` は存在しない。サーバーとTailwind watchは別ターミナルで起動する
 - テストはMinitest（デフォルト生成のスケルトンのみ）
 
 ## ディレクトリ構成（主要部分）
@@ -53,9 +55,15 @@ app/
   forms/
     records_form.rb             # バリデーション付きフォームオブジェクト
   views/records/                # フォーム・利用規約・プライバシーポリシー
+  javascript/
+    application.js              # importmap エントリーポイント
+  assets/
+    tailwind/application.css    # Tailwind CSS エントリーポイント
 lib/pdf/
   notification_pdf/post_pdf.rb  # PDF生成ロジック (Prawn)
-config/locales/                 # i18n翻訳ファイル (ja/en/zh)
+config/
+  importmap.rb                  # JavaScript モジュールのピン設定
+  locales/                      # i18n翻訳ファイル (ja/en/zh)
 ```
 
 ## コーディング規約
