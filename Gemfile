@@ -9,8 +9,10 @@ gem 'rails', '~> 7.0.0'
 # gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+# Tailwind CSS
+gem 'tailwindcss-rails'
+# Sprockets for asset pipeline
+gem 'sprockets-rails'
 # Use JavaScript with ESM import maps
 gem 'importmap-rails'
 # Hotwire's SPA-like page accelerator
