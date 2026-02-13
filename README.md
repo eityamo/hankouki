@@ -65,4 +65,4 @@ bin/rails test
 git push heroku main
 ```
 
-Docker ベースのデプロイです（`Dockerfile` / `entrypoint.sh` を使用）。
+`Dockerfile` / `entrypoint.sh` は Heroku デプロイ専用です。ローカル開発では Docker は使用しません。
