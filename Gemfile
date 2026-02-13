@@ -32,8 +32,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3', '~> 1.4' # <= 開発環境とテスト環境用として設定
+  gem 'byebug', platforms: [:mri, :windows]
+  gem 'sqlite3', '~> 2.0' # <= 開発環境とテスト環境用として設定
 end
 
 group :development do
@@ -41,7 +41,7 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler', '~> 4.0'
 end
 
 group :test do
@@ -56,7 +56,7 @@ group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: [:windows, :jruby]
 
 # create a PDF file
 gem 'prawn'
