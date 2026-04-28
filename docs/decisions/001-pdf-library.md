@@ -13,7 +13,7 @@ Accepted
 Prawn + Prawn-Table を採用する。
 
 理由:
-- Pure Ruby で外部バイナリ依存なし（Heroku Docker 環境での運用が容易）
+- Pure Ruby で外部バイナリ依存なし（Cloudflare Docker 環境での運用が容易）
 - 日本語フォント埋め込みに対応
 - テーブルレイアウトは prawn-table で実現可能
 
