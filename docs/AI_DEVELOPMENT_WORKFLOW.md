@@ -80,7 +80,7 @@ hankouki-todoke/
 |---|---|---|
 | **Outcomes** | 完了条件 | 「ユーザーがPDFをダウンロードできる」 |
 | **Scope** | 範囲内/範囲外 | 範囲外: 認証機能 |
-| **Constraints** | 技術的制約 | Rails 7.1, Prawn, Heroku |
+| **Constraints** | 技術的制約 | Rails 7.1, Prawn, Cloudflare |
 | **Prior Decisions** | 既決事項 | ADR参照 |
 | **Tasks** | タスク分解 | フェーズ1: モデル、フェーズ2: ビュー |
 | **Verification** | 検証基準 | テストケース、エッジケース |
