@@ -38,6 +38,7 @@ gem 'prawn-table'
 
 gem 'rails-i18n', '~> 7.0'
 gem 'pry-rails'
+gem 'minitest', '~> 5.0'
 
 # OGP・SEO
 gem 'meta-tags'

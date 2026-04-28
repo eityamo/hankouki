@@ -139,8 +139,7 @@ GEM
       actionpack (>= 6.0.0)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    minitest (6.0.1)
-      prism (~> 1.5)
+    minitest (5.27.0)
     msgpack (1.8.0)
     mutex_m (0.3.0)
     net-imap (0.6.2)
@@ -295,6 +294,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   importmap-rails
   meta-tags
+  minitest (~> 5.0)
   pg
   prawn
   prawn-table
