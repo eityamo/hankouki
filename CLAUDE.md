@@ -83,7 +83,7 @@ config/
 - DBスキーマ変更（マイグレーション追加）
 - gem の追加・削除
 - ルーティング変更
-- Dockerfile / デプロイ設定の変更
+- Dockerfile / Cloudflare デプロイ設定の変更
 
 ### 禁止
 - `.env`、credentials、シークレットのコミット
