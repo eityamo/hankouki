@@ -30,28 +30,18 @@
     </div>
   </div>
   <%= render 'shared/footer' %>
+  <script>
+  (function() {
+    var scrollBtn = document.getElementById('scroll-down');
+    if (scrollBtn) {
+      scrollBtn.addEventListener('click', function() {
+        var form = document.getElementById('form');
+        if (form) {
+          form.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+        }
+      });
+    }
+  })();
+  </script>
   </body>
 </html>
-
-<%#
-<script>
-const moons = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🌑', '🌘', '🌗', '🌖', '🌖', '🌕', '🌔', '🌓', '🌒'];
-let count = 0;
-setInterval(()=> {
-    location.hash = moons[count % moons.length];
-    count++;
-}, 200);
-</script>
-%>
-<script>
-document.getElementById('scroll-down').addEventListener('click', () => {
-// formの表示位置を取得
-  var form = document.getElementById('form');
-// formまでスクロール
-    form.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "start"
-    });
-});
-</script>
