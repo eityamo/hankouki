@@ -22,9 +22,9 @@ class RecordsFormTest < ActiveSupport::TestCase
     assert form.valid?
   end
 
-  test "stamp が nil の場合 vertical_stamp で NoMethodError が発生する（既知のバグ）" do
+  test "stamp が nil の場合でもエラーなくバリデーションが通る" do
     form = RecordsForm.new(fromdate: Date.today, todate: Date.today + 1, stamp: nil)
-    assert_raises(NoMethodError) { form.valid? }
+    assert_nothing_raised { form.valid? }
   end
 
   # --- myname バリデーション ---

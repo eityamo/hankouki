@@ -23,13 +23,14 @@ class RecordsForm
   validate :start_end_check
 
   def start_end_check
+    return if fromdate.blank? || todate.blank?
     errors.add(:todate, "は開始日より前の日付は登録できません。") unless self.fromdate < self.todate
   end
 
   private
 
   def vertical_stamp
-    self.stamp = vertical(self.stamp) if self.stamp.length == 4
+    self.stamp = vertical(self.stamp) if self.stamp.present? && self.stamp.length == 4
   end
 
   def vertical(stamp)
