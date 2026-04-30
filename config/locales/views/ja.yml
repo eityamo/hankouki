@@ -6,7 +6,7 @@ ja:
     english: "English"
     chinese: "Chinese"
     japanese: "Japanese"
-    footer: "© 2022 反抗期届"
+    footer: "© %{year} 反抗期届"
     terms: "利用規約"
     privacy: "プライバシーポリシー"
     twitter: "開発者Twitter"

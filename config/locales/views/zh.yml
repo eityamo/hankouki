@@ -6,7 +6,7 @@ zh:
     english: "English"
     chinese: "Chinese"
     japanese: "Japanese"
-    footer: "© 2022 獨立宣言"
+    footer: "© %{year} 獨立宣言"
     terms: "服务条款"
     privacy: "隐私政策"
     twitter: "开发商 Twitter"

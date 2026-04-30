@@ -6,7 +6,7 @@ en:
     english: "English"
     chinese: "Chinese"
     japanese: "Japanese"
-    footer: "© 2022 REBELLION NOTICE"
+    footer: "© %{year} REBELLION NOTICE"
     terms: "Terms and condition"
     privacy: "Privacy"
     twitter: "Developer Twitter"
