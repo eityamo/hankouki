@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :windows]
   gem 'sqlite3', '~> 2.0'
+  gem 'dotenv-rails'
 end
 
 group :development do
