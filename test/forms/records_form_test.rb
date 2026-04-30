@@ -66,6 +66,41 @@ class RecordsFormTest < ActiveSupport::TestCase
     assert form.errors[:yourname].any?
   end
 
+  # --- old バリデーション ---
+
+  test "old が1は有効" do
+    form = RecordsForm.new(valid_params.merge(old: 1))
+    assert form.valid?
+  end
+
+  test "old が99は有効" do
+    form = RecordsForm.new(valid_params.merge(old: 99))
+    assert form.valid?
+  end
+
+  test "old が0で無効" do
+    form = RecordsForm.new(valid_params.merge(old: 0))
+    assert_not form.valid?
+    assert form.errors[:old].any?
+  end
+
+  test "old が100で無効" do
+    form = RecordsForm.new(valid_params.merge(old: 100))
+    assert_not form.valid?
+    assert form.errors[:old].any?
+  end
+
+  test "old が負数で無効" do
+    form = RecordsForm.new(valid_params.merge(old: -1))
+    assert_not form.valid?
+    assert form.errors[:old].any?
+  end
+
+  test "old が nil は許容される" do
+    form = RecordsForm.new(valid_params.merge(old: nil))
+    assert form.valid?
+  end
+
   # --- remark バリデーション ---
 
   test "remark が131文字ちょうどは有効" do
