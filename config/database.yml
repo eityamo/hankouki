@@ -21,8 +21,4 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: clbn7in3q001ybequb33r979b
-  username: clbn7in3n001wbequhit52gcb
-  password: <%= ENV['HANKOUKI_DATABASE_PASSWORD'] %>
   url: <%= ENV['DATABASE_URL'] %>
