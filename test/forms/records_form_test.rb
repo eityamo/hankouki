@@ -118,6 +118,39 @@ class RecordsFormTest < ActiveSupport::TestCase
     assert form.valid?
   end
 
+  # --- サニタイズ ---
+
+  test "myname に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(myname: "<b>太郎</b>"))
+    form.valid?
+    assert_equal "&lt;b&gt;太郎&lt;/b&gt;", form.myname
+  end
+
+  test "remark に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(remark: "<script>"))
+    form.valid?
+    assert_equal "&lt;script&gt;", form.remark
+  end
+
+  test "yourname に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(yourname: "お母<さん>"))
+    form.valid?
+    assert_equal "お母&lt;さん&gt;", form.yourname
+  end
+
+  test "stamp に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(stamp: "<山>"))
+    form.valid?
+    assert_equal "&lt;山&gt;", form.stamp
+  end
+
+  test "タグを含まない入力値はそのまま保持される" do
+    form = RecordsForm.new(valid_params)
+    form.valid?
+    assert_equal "太郎", form.myname
+    assert_equal "よろしく", form.remark
+  end
+
   # --- デフォルト値 ---
 
   test "fromdate のデフォルトは今日" do
