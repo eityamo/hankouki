@@ -4,6 +4,7 @@ class RecordsForm
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
 
+  before_validation :sanitize_inputs
   after_validation :vertical_stamp
 
   attribute :myname, :string
@@ -28,6 +29,14 @@ class RecordsForm
   end
 
   private
+
+  def sanitize_inputs
+    %i[myname stamp yourname remark].each do |attr|
+      value = send(attr)
+      next if value.blank?
+      send("#{attr}=", value.gsub("<", "&lt;").gsub(">", "&gt;"))
+    end
+  end
 
   def vertical_stamp
     self.stamp = vertical(self.stamp) if self.stamp.present? && self.stamp.length == 4
