@@ -20,6 +20,7 @@ class RecordsForm
   validates :myname, { length: { maximum: 10 } }
   validates :stamp, { length: { maximum: 4 } }
   validates :yourname, { length: { maximum: 10 } }
+  validates :old, numericality: { only_integer: true, in: 1..99, allow_nil: true }
   validates :remark, { length: { maximum: 131 } }
   validate :start_end_check
 
