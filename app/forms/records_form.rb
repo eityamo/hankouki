@@ -26,7 +26,7 @@ class RecordsForm
 
   def start_end_check
     return if fromdate.blank? || todate.blank?
-    errors.add(:todate, "は開始日より前の日付は登録できません。") unless self.fromdate < self.todate
+    errors.add(:todate, I18n.t('errors.messages.end_before_start')) unless self.fromdate < self.todate
   end
 
   private

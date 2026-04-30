@@ -1,4 +1,7 @@
 en:
+  errors:
+    messages:
+      end_before_start: "must be after the start date."
   date:
     formats:
       default: "%Y-%m-%d"

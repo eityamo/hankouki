@@ -1,4 +1,7 @@
 zh:
+  errors:
+    messages:
+      end_before_start: "不能早于开始日期。"
   date:
     formats:
       default: "%Y-%m-%d"

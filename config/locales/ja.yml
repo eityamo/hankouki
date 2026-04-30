@@ -1,4 +1,7 @@
 ja:
+  errors:
+    messages:
+      end_before_start: "は開始日より前の日付は登録できません。"
   date:
     formats:
       default: "%Y/%m/%d"
