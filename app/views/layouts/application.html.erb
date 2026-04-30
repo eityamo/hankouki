@@ -11,15 +11,17 @@
 
     <%= stylesheet_link_tag 'tailwind', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
+    <% if ENV['GA_TRACKING_ID'].present? %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRVBKEM4C8"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_TRACKING_ID'] %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
-      gtag('config', 'G-GRVBKEM4C8');
+
+      gtag('config', '<%= ENV['GA_TRACKING_ID'] %>');
     </script>
+    <% end %>
   </head>
 
   <body>
