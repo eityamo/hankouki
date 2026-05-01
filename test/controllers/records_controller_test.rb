@@ -57,7 +57,7 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
         remark: ""
       }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_select "form"
   end
 

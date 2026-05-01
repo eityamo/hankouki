@@ -11,6 +11,7 @@ en:
     privacy: "Privacy"
     twitter: "Developer Twitter"
     facebook: "Developer Facebook"
+    pdf_error: "Failed to generate PDF. Please try again."
   records:
     new:
       title: "LITTLE REBELLION"
