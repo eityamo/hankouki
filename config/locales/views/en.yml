@@ -12,6 +12,11 @@ en:
     twitter: "Developer Twitter"
     facebook: "Developer Facebook"
     pdf_error: "Failed to generate PDF. Please try again."
+    error_404_title: "Page not found"
+    error_404_message: "The page you were looking for doesn't exist or may have been moved."
+    error_500_title: "Server error"
+    error_500_message: "Sorry, something went wrong on our end."
+    back_to_home: "Back to home"
   records:
     new:
       title: "LITTLE REBELLION"
