@@ -20,6 +20,7 @@ end
 group :development do
   gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 4.0'
+  gem 'pry-rails'
 end
 
 group :test do
@@ -38,7 +39,6 @@ gem 'prawn'
 gem 'prawn-table'
 
 gem 'rails-i18n', '~> 7.0'
-gem 'pry-rails'
 gem 'minitest', '~> 5.0'
 
 # OGP・SEO
