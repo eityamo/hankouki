@@ -1,8 +1,8 @@
-<% set_meta_tags title: '反抗期届', description: 'ディスクリプション' %>
+<% set_meta_tags title: t('defaults.site'), description: t('defaults.description') %>
 
 <section class="flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg rounded-lg relative py-12 md:py-12 xl:py-24">
   <!-- image - start -->
-  <%= image_tag 'top4.png', class: "w-full h-full object-cover object-center absolute inset-0" %>
+  <%= image_tag 'top4.png', alt: t('.hero_alt'), class: "w-full h-full object-cover object-center absolute inset-0" %>
   <!-- img src="https://images.unsplash.com/photo-1618004652321-13a63e576b80?auto=format&q=75&fit=crop&w=1500" loading="lazy" alt="Photo by Fakurian Design" class="w-full h-full object-cover object-center absolute inset-0" /-->
   <!-- image - end -->
 
@@ -15,7 +15,7 @@
     <h1 class="titile text-white text-5xl sm:text-5xl md:text-7xl font-bold text-center mt-8 md:mt-20 mb-8 md:mb-8"><%= t '.title' %></h1>
     <p class="text-white text-2xl md:text-4xl sm:text-2xl text-center mb-4 md:mb-16 mt-8 md:mt-20"><%= t '.subtitle' %></p>
     <p class="text-white text-lg md:text-xl sm:text-xl text-center mb-2 md:mb-8 mt-8 md:mt-12 opacity-75"><%= t '.arrow_down' %></p>
-    <button class="scroll-down-dude text-center" id="scroll-down"></button>
+    <button class="scroll-down-dude text-center" id="scroll-down" aria-label="<%= t('.arrow_down') %>"></button>
   </div>
   <!-- text end -->
 </section>
@@ -65,12 +65,12 @@
 
       <div class="inline-block relative w-48">
         <%= f.label :getup %>
-        <%= f.select :getup, [t('.necessary'), t('.unnecessary'), t('.consultation')],  { include_blank: true }, class:"text-center bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+        <%= f.select :getup, [t('.necessary'), t('.unnecessary'), t('.consultation')],  { include_blank: t('.select_placeholder') }, class:"text-center bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
       </div>
 
       <div class="inline-block relative w-48">
         <%= f.label :cleanup %>
-        <%= f.select :cleanup, [t('.necessary'), t('.unnecessary'), t('.consultation')],  { include_blank: true }, class:"text-center bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+        <%= f.select :cleanup, [t('.necessary'), t('.unnecessary'), t('.consultation')],  { include_blank: t('.select_placeholder') }, class:"text-center bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
       </div>
 
       <div class="sm:col-span-2">
