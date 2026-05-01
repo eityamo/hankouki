@@ -1,5 +1,5 @@
 ARG APP_NAME=hankouki
-ARG RUBY_IMAGE=ruby:3.3.6
+ARG RUBY_IMAGE=ruby:3.3.6-slim
 ARG BUNDLER_VERSION=2.5.22
 
 FROM $RUBY_IMAGE
@@ -35,3 +35,4 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
