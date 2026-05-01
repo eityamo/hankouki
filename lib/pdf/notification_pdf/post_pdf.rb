@@ -2,8 +2,45 @@ module NotificationPdf
   class PostPdf < Prawn::Document
     FONT_DIR = Rails.root.join('app', 'assets', 'fonts').to_s
 
+    # レイアウト座標定数
+    TITLE_Y       = 700
+    DATE_X        = 350
+    DATE_Y        = 640
+    HEADER_X      = 75
+    HEADER_Y      = 620
+    LABEL_X       = 70
+    VALUE_CENTER_X = 0
+    NAME_Y        = 550
+    SEAL_X        = 350
+    AGE_X         = 385
+    AGE_VALUE_X   = 391
+    PERIOD_Y      = 490
+    PERIOD_END_Y  = 460
+    PERIOD_VALUE_X = 200
+    PARENT_Y      = 400
+    GETUP_Y       = 320
+    CLEANUP_Y     = 270
+    REMARK_LABEL_Y = 160
+    REMARK_BOX_X  = 115
+    REMARK_BOX_Y  = 148
+    REMARK_BOX_W  = 312
+    REMARK_BOX_H  = 100
+    FOOTER_Y1     = 70
+    FOOTER_Y2     = 60
+    STAMP_AT      = [330, 530]
+
+    # 選択肢の丸印位置（X 座標）
+    OPTION_NECESSARY_X    = 217
+    OPTION_UNNECESSARY_X  = 294
+    OPTION_CONSULTATION_X = 380
+    CIRCLE_RADIUS = 10
+
+    # 選択肢ラベル位置
+    OPTION_LABEL_NECESSARY    = { at: [190, 0], width: 54 }.freeze
+    OPTION_LABEL_UNNECESSARY  = { at: [260, 0], width: 68 }.freeze
+    OPTION_LABEL_CONSULTATION = { at: [345, 0], width: 69 }.freeze
+
     def initialize(record)
-      # 新規PDF作成
       super(page_size: "A4")
 
       register_fonts
@@ -35,64 +72,66 @@ module NotificationPdf
 
     def create_title
       font "SourceHanSansHeavy" do
-        text_box I18n.t('defaults.site'), at: [0, 700], align: :center, size: 40
+        text_box I18n.t('defaults.site'), at: [0, TITLE_Y], align: :center, size: 40
       end
     end
 
     def create_header
       font "SourceHanSans", style: :bold do
-        text_box I18n.l(Date.current, format: :long), at: [350, 640]
-        text_box I18n.t('records.new.create_header'), at: [75, 620]
+        text_box I18n.l(Date.current, format: :long), at: [DATE_X, DATE_Y]
+        text_box I18n.t('records.new.create_header'), at: [HEADER_X, HEADER_Y]
       end
     end
 
     def create_contents
       font "SourceHanSans", style: :bold do
-        text_box I18n.t('activemodel.attributes.records_form.myname'), at: [70, 550]
-        text_box I18n.t('records.new.seal'), at: [350, 550]
-        text_box "(      )" + I18n.t('records.new.age'), at: [385, 550]
-        text_box I18n.t('activemodel.attributes.records_form.fromdate'), at: [70, 490]
-        text_box I18n.t('records.new.from'), at: [350, 490]
-        text_box I18n.t('records.new.to'), at: [350, 460]
-        text_box I18n.t('activemodel.attributes.records_form.yourname'), at: [70, 400]
-        text_box I18n.t('activemodel.attributes.records_form.getup'), at: [70, 320]
-        text_box I18n.t('activemodel.attributes.records_form.cleanup'), at: [70, 270]
-        text_box I18n.t('activemodel.attributes.records_form.remark'), at: [70, 160]
+        text_box I18n.t('activemodel.attributes.records_form.myname'), at: [LABEL_X, NAME_Y]
+        text_box I18n.t('records.new.seal'), at: [SEAL_X, NAME_Y]
+        text_box "(      )" + I18n.t('records.new.age'), at: [AGE_X, NAME_Y]
+        text_box I18n.t('activemodel.attributes.records_form.fromdate'), at: [LABEL_X, PERIOD_Y]
+        text_box I18n.t('records.new.from'), at: [DATE_X, PERIOD_Y]
+        text_box I18n.t('records.new.to'), at: [DATE_X, PERIOD_END_Y]
+        text_box I18n.t('activemodel.attributes.records_form.yourname'), at: [LABEL_X, PARENT_Y]
+        text_box I18n.t('activemodel.attributes.records_form.getup'), at: [LABEL_X, GETUP_Y]
+        text_box I18n.t('activemodel.attributes.records_form.cleanup'), at: [LABEL_X, CLEANUP_Y]
+        text_box I18n.t('activemodel.attributes.records_form.remark'), at: [LABEL_X, REMARK_LABEL_Y]
         font "SourceHanSans" do
-          text_box I18n.t('records.new.necessary'), at: [190, 320], width: 54, align: :center
-          text_box I18n.t('records.new.unnecessary'), at: [260, 320], width: 68, align: :center
-          text_box I18n.t('records.new.consultation'), at: [345, 320], width: 69, align: :center
-          text_box I18n.t('records.new.necessary'), at: [190, 270], width: 54, align: :center
-          text_box I18n.t('records.new.unnecessary'), at: [260, 270], width: 68, align: :center
-          text_box I18n.t('records.new.consultation'), at: [345, 270], width: 69, align: :center
+          [GETUP_Y, CLEANUP_Y].each do |y|
+            draw_option_label(I18n.t('records.new.necessary'), OPTION_LABEL_NECESSARY, y)
+            draw_option_label(I18n.t('records.new.unnecessary'), OPTION_LABEL_UNNECESSARY, y)
+            draw_option_label(I18n.t('records.new.consultation'), OPTION_LABEL_CONSULTATION, y)
+          end
         end
       end
     end
 
+    def draw_option_label(text, config, y)
+      text_box text, at: [config[:at][0], y], width: config[:width], align: :center
+    end
+
     def create_form(record)
       font "SourceHanSans" do
-        text_box record.myname.to_s, at: [0, 550], align: :center
-        text_box record.old.to_s, at: [391, 550]
-        text_box I18n.l(record.fromdate, format: :long), at: [200, 490]
-        text_box I18n.l(record.todate, format: :long), at: [200, 460]
-        text_box record.yourname.to_s, at: [0, 400], align: :center
-        if record.getup == 'necessary'
-          stroke_circle [217, 313], 10
-        elsif record.getup == 'unnecessary'
-          stroke_ellipse [294, 313], 10
-        elsif record.getup == 'consultation'
-          stroke_ellipse [380, 313], 10
-        end
-        if record.cleanup == 'necessary'
-          stroke_circle [217, 263], 10
-        elsif record.cleanup == 'unnecessary'
-          stroke_ellipse [294, 263], 10
-        elsif record.cleanup == 'consultation'
-          stroke_ellipse [380, 263], 10
-        end
-        bounding_box([115, 148], width: 312, height: 100) do
+        text_box record.myname.to_s, at: [VALUE_CENTER_X, NAME_Y], align: :center
+        text_box record.old.to_s, at: [AGE_VALUE_X, NAME_Y]
+        text_box I18n.l(record.fromdate, format: :long), at: [PERIOD_VALUE_X, PERIOD_Y]
+        text_box I18n.l(record.todate, format: :long), at: [PERIOD_VALUE_X, PERIOD_END_Y]
+        text_box record.yourname.to_s, at: [VALUE_CENTER_X, PARENT_Y], align: :center
+        draw_selection_circle(record.getup, GETUP_Y - 7)
+        draw_selection_circle(record.cleanup, CLEANUP_Y - 7)
+        bounding_box([REMARK_BOX_X, REMARK_BOX_Y], width: REMARK_BOX_W, height: REMARK_BOX_H) do
           text_box record.remark.to_s
         end
+      end
+    end
+
+    def draw_selection_circle(value, y)
+      case value
+      when 'necessary'
+        stroke_circle [OPTION_NECESSARY_X, y], CIRCLE_RADIUS
+      when 'unnecessary'
+        stroke_ellipse [OPTION_UNNECESSARY_X, y], CIRCLE_RADIUS
+      when 'consultation'
+        stroke_ellipse [OPTION_CONSULTATION_X, y], CIRCLE_RADIUS
       end
     end
 
@@ -128,13 +167,13 @@ module NotificationPdf
           end
         end
       end
-      stamp_at 'approved', [330, 530]
+      stamp_at 'approved', STAMP_AT
     end
 
     def create_footer
       font "SourceHanSans", style: :bold do
-        text_box I18n.t('records.new.create_footer1'), at: [70, 70], size: 10
-        text_box I18n.t('records.new.create_footer2'), at: [70, 60], size: 10
+        text_box I18n.t('records.new.create_footer1'), at: [LABEL_X, FOOTER_Y1], size: 10
+        text_box I18n.t('records.new.create_footer2'), at: [LABEL_X, FOOTER_Y2], size: 10
       end
     end
   end
