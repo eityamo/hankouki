@@ -57,18 +57,18 @@ module NotificationPdf
         text_box "#{I18n.l(record.fromdate, format: :long)}", at: [200, 490]
         text_box "#{I18n.l(record.todate, format: :long)}", at: [200, 460]
         text_box "#{record.yourname}", at: [0, 400], align: :center
-        if record.getup == I18n.t('records.new.necessary')
+        if record.getup == 'necessary'
           stroke_circle [217, 313], 10
-        elsif record.getup == I18n.t('records.new.unnecessary')
+        elsif record.getup == 'unnecessary'
           stroke_ellipse [294, 313], 10
-        elsif record.getup == I18n.t('records.new.consultation')
+        elsif record.getup == 'consultation'
           stroke_ellipse [380, 313], 10
         end
-        if record.cleanup == I18n.t('records.new.necessary')
+        if record.cleanup == 'necessary'
           stroke_circle [217, 263], 10
-        elsif record.cleanup == I18n.t('records.new.unnecessary')
+        elsif record.cleanup == 'unnecessary'
           stroke_ellipse [294, 263], 10
-        elsif record.cleanup == I18n.t('records.new.consultation')
+        elsif record.cleanup == 'consultation'
           stroke_ellipse [380, 263], 10
         end
         bounding_box([115, 148], width: 312, height: 60) do

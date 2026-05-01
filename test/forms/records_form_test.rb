@@ -10,8 +10,8 @@ class RecordsFormTest < ActiveSupport::TestCase
       todate: Date.new(2026, 4, 30),
       yourname: "お母さん",
       remark: "よろしく",
-      getup: "要",
-      cleanup: "不要"
+      getup: "necessary",
+      cleanup: "unnecessary"
     }
   end
 
