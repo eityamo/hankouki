@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     get 'privacy_policy', to: 'records#privacy_policy'
     resources :records, only: %i[create]
   end
+
+  # 動的エラーページ
+  match '/404', to: 'errors#not_found', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
 end
