@@ -23,7 +23,7 @@ module ApplicationHelper
         type: 'website',
         url: request.original_url,
         image: image_url('ogp.png'),
-        locale: 'ja_JP',
+        locale: { ja: 'ja_JP', en: 'en_US', zh: 'zh_CN' }[I18n.locale],
       },
       twitter: {
         card: 'summary_large_image',
