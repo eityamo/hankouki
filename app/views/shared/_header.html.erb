@@ -1,7 +1,7 @@
 <header class="flex justify-between items-center py-4 md:py-8">
   <!-- logo - start -->
   <%= link_to root_path, class: "titile inline-flex items-center text-black-800 text-2xl md:text-3xl font-bold gap-2.5" do %>
-    <%= image_tag 'children_crossing.png', class: 'h-12 w-12 cursor-pointer mx-2' %>
+    <%= image_tag 'children_crossing.png', alt: t('defaults.site'), class: 'h-12 w-12 cursor-pointer mx-2' %>
     <%= t 'records.new.title' %>
   <% end %>
 
@@ -9,9 +9,9 @@
 
   <!-- nav - start -->
   <nav class="hidden lg:flex gap-12">
-    <%= link_to t('defaults.english'), "/en/records", class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %> 
-    <%= link_to t('defaults.chinese'), "/zh/records", class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %> 
-    <%= link_to t('defaults.japanese'), "/ja/records", class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
+    <%= link_to t('defaults.english'), url_for(locale: :en), class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
+    <%= link_to t('defaults.chinese'), url_for(locale: :zh), class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
+    <%= link_to t('defaults.japanese'), url_for(locale: :ja), class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
   </nav>
   <!-- nav - end -->
 </header>
