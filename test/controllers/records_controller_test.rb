@@ -32,8 +32,8 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
         fromdate: "2026-04-01",
         todate: "2026-04-30",
         yourname: "お母さん",
-        getup: "要",
-        cleanup: "不要",
+        getup: "necessary",
+        cleanup: "unnecessary",
         remark: "よろしく"
       }
     }
@@ -57,7 +57,7 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
         remark: ""
       }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_select "form"
   end
 

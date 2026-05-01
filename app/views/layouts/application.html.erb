@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <!-- ogp -->
     <%= display_meta_tags(default_meta_tags) %>
@@ -11,15 +11,17 @@
 
     <%= stylesheet_link_tag 'tailwind', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
+    <% if ENV['GA_TRACKING_ID'].present? %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRVBKEM4C8"></script>
-    <script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_TRACKING_ID'] %>" nonce="<%= content_security_policy_nonce %>"></script>
+    <script nonce="<%= content_security_policy_nonce %>">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
-      gtag('config', 'G-GRVBKEM4C8');
+
+      gtag('config', '<%= ENV['GA_TRACKING_ID'] %>');
     </script>
+    <% end %>
   </head>
 
   <body>
@@ -30,7 +32,7 @@
     </div>
   </div>
   <%= render 'shared/footer' %>
-  <script>
+  <script nonce="<%= content_security_policy_nonce %>">
   (function() {
     var scrollBtn = document.getElementById('scroll-down');
     if (scrollBtn) {

@@ -6,7 +6,7 @@ en:
         stamp: Initial
         old: Age
         fromdate: Period of Rebellion
-        todate:
+        todate: End date
         yourname: Parent's Name
         remark: Remarks
         getup: Wake Up

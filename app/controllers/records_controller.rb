@@ -6,14 +6,18 @@ class RecordsController < ApplicationController
   def create
     @record = RecordsForm.new(record_params)
     if @record.valid?
-    post_pdf = NotificationPdf::PostPdf.new(@record).render
+      post_pdf = NotificationPdf::PostPdf.new(@record).render
       send_data post_pdf,
         filename: 'post_pdf.pdf',
         type: 'application/pdf',
-        disposition: 'inline' #PDFをブラウザ上に出力　外すとダウンロード
+        disposition: 'inline'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
+  rescue => e
+    Rails.logger.error("PDF generation failed: #{e.message}")
+    flash.now[:alert] = I18n.t('defaults.pdf_error')
+    render :new, status: :internal_server_error
   end
 
   def terms; end

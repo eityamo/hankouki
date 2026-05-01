@@ -10,8 +10,8 @@ class RecordsFormTest < ActiveSupport::TestCase
       todate: Date.new(2026, 4, 30),
       yourname: "お母さん",
       remark: "よろしく",
-      getup: "要",
-      cleanup: "不要"
+      getup: "necessary",
+      cleanup: "unnecessary"
     }
   end
 
@@ -66,6 +66,41 @@ class RecordsFormTest < ActiveSupport::TestCase
     assert form.errors[:yourname].any?
   end
 
+  # --- old バリデーション ---
+
+  test "old が1は有効" do
+    form = RecordsForm.new(valid_params.merge(old: 1))
+    assert form.valid?
+  end
+
+  test "old が99は有効" do
+    form = RecordsForm.new(valid_params.merge(old: 99))
+    assert form.valid?
+  end
+
+  test "old が0で無効" do
+    form = RecordsForm.new(valid_params.merge(old: 0))
+    assert_not form.valid?
+    assert form.errors[:old].any?
+  end
+
+  test "old が100で無効" do
+    form = RecordsForm.new(valid_params.merge(old: 100))
+    assert_not form.valid?
+    assert form.errors[:old].any?
+  end
+
+  test "old が負数で無効" do
+    form = RecordsForm.new(valid_params.merge(old: -1))
+    assert_not form.valid?
+    assert form.errors[:old].any?
+  end
+
+  test "old が nil は許容される" do
+    form = RecordsForm.new(valid_params.merge(old: nil))
+    assert form.valid?
+  end
+
   # --- remark バリデーション ---
 
   test "remark が131文字ちょうどは有効" do
@@ -116,6 +151,39 @@ class RecordsFormTest < ActiveSupport::TestCase
   test "stamp が空文字の場合はエラーにならない" do
     form = RecordsForm.new(valid_params.merge(stamp: ""))
     assert form.valid?
+  end
+
+  # --- サニタイズ ---
+
+  test "myname に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(myname: "<b>太郎</b>"))
+    form.valid?
+    assert_equal "&lt;b&gt;太郎&lt;/b&gt;", form.myname
+  end
+
+  test "remark に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(remark: "<script>"))
+    form.valid?
+    assert_equal "&lt;script&gt;", form.remark
+  end
+
+  test "yourname に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(yourname: "お母<さん>"))
+    form.valid?
+    assert_equal "お母&lt;さん&gt;", form.yourname
+  end
+
+  test "stamp に含まれる < > がエスケープされる" do
+    form = RecordsForm.new(valid_params.merge(stamp: "<山>"))
+    form.valid?
+    assert_equal "&lt;山&gt;", form.stamp
+  end
+
+  test "タグを含まない入力値はそのまま保持される" do
+    form = RecordsForm.new(valid_params)
+    form.valid?
+    assert_equal "太郎", form.myname
+    assert_equal "よろしく", form.remark
   end
 
   # --- デフォルト値 ---

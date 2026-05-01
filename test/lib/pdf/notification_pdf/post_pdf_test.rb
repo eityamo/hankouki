@@ -9,8 +9,8 @@ class NotificationPdf::PostPdfTest < ActiveSupport::TestCase
       fromdate: Date.new(2026, 4, 1),
       todate: Date.new(2026, 4, 30),
       yourname: "お母さん",
-      getup: "要",
-      cleanup: "不要",
+      getup: "necessary",
+      cleanup: "unnecessary",
       remark: "よろしく"
     }.merge(overrides))
   end
@@ -60,33 +60,33 @@ class NotificationPdf::PostPdfTest < ActiveSupport::TestCase
 
   # --- getup / cleanup のバリエーション ---
 
-  test "getup が '要' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(getup: "要"))
+  test "getup が 'necessary' で PDF 生成成功" do
+    pdf = NotificationPdf::PostPdf.new(build_record(getup: "necessary"))
     assert pdf.render.start_with?("%PDF")
   end
 
-  test "getup が '不要' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(getup: "不要"))
+  test "getup が 'unnecessary' で PDF 生成成功" do
+    pdf = NotificationPdf::PostPdf.new(build_record(getup: "unnecessary"))
     assert pdf.render.start_with?("%PDF")
   end
 
-  test "getup が '都度相談' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(getup: "都度相談"))
+  test "getup が 'consultation' で PDF 生成成功" do
+    pdf = NotificationPdf::PostPdf.new(build_record(getup: "consultation"))
     assert pdf.render.start_with?("%PDF")
   end
 
-  test "cleanup が '要' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "要"))
+  test "cleanup が 'necessary' で PDF 生成成功" do
+    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "necessary"))
     assert pdf.render.start_with?("%PDF")
   end
 
-  test "cleanup が '不要' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "不要"))
+  test "cleanup が 'unnecessary' で PDF 生成成功" do
+    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "unnecessary"))
     assert pdf.render.start_with?("%PDF")
   end
 
-  test "cleanup が '都度相談' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "都度相談"))
+  test "cleanup が 'consultation' で PDF 生成成功" do
+    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "consultation"))
     assert pdf.render.start_with?("%PDF")
   end
 
