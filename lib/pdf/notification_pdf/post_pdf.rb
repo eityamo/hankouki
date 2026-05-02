@@ -72,29 +72,32 @@ module NotificationPdf
 
     def create_title
       font "SourceHanSansHeavy" do
-        text_box I18n.t('defaults.site'), at: [0, TITLE_Y], align: :center, size: 40
+        text_box I18n.t('defaults.site'), at: [0, TITLE_Y], width: bounds.width, align: :center, size: 40, overflow: :shrink_to_fit
       end
     end
 
     def create_header
       font "SourceHanSans", style: :bold do
-        text_box I18n.l(Date.current, format: :long), at: [DATE_X, DATE_Y]
-        text_box I18n.t('records.new.create_header'), at: [HEADER_X, HEADER_Y]
+        text_box I18n.l(Date.current, format: :long), at: [DATE_X, DATE_Y], width: bounds.width - DATE_X
+        text_box I18n.t('records.new.create_header'), at: [HEADER_X, HEADER_Y], width: bounds.width - HEADER_X * 2, overflow: :shrink_to_fit
       end
     end
 
+    # ラベル列の最大幅（英語ラベルがはみ出さないよう制限）
+    LABEL_WIDTH = 120
+
     def create_contents
       font "SourceHanSans", style: :bold do
-        text_box I18n.t('activemodel.attributes.records_form.myname'), at: [LABEL_X, NAME_Y]
-        text_box I18n.t('records.new.seal'), at: [SEAL_X, NAME_Y]
-        text_box "(      )" + I18n.t('records.new.age'), at: [AGE_X, NAME_Y]
-        text_box I18n.t('activemodel.attributes.records_form.fromdate'), at: [LABEL_X, PERIOD_Y]
-        text_box I18n.t('records.new.from'), at: [DATE_X, PERIOD_Y]
-        text_box I18n.t('records.new.to'), at: [DATE_X, PERIOD_END_Y]
-        text_box I18n.t('activemodel.attributes.records_form.yourname'), at: [LABEL_X, PARENT_Y]
-        text_box I18n.t('activemodel.attributes.records_form.getup'), at: [LABEL_X, GETUP_Y]
-        text_box I18n.t('activemodel.attributes.records_form.cleanup'), at: [LABEL_X, CLEANUP_Y]
-        text_box I18n.t('activemodel.attributes.records_form.remark'), at: [LABEL_X, REMARK_LABEL_Y]
+        text_box I18n.t('activemodel.attributes.records_form.myname'), at: [LABEL_X, NAME_Y], width: LABEL_WIDTH, overflow: :shrink_to_fit
+        text_box I18n.t('records.new.seal'), at: [SEAL_X, NAME_Y], width: 40
+        text_box "(      )" + I18n.t('records.new.age'), at: [AGE_X, NAME_Y], width: 100
+        text_box I18n.t('activemodel.attributes.records_form.fromdate'), at: [LABEL_X, PERIOD_Y], width: LABEL_WIDTH, overflow: :shrink_to_fit
+        text_box I18n.t('records.new.from'), at: [DATE_X, PERIOD_Y], width: 60
+        text_box I18n.t('records.new.to'), at: [DATE_X, PERIOD_END_Y], width: 60
+        text_box I18n.t('activemodel.attributes.records_form.yourname'), at: [LABEL_X, PARENT_Y], width: LABEL_WIDTH, overflow: :shrink_to_fit
+        text_box I18n.t('activemodel.attributes.records_form.getup'), at: [LABEL_X, GETUP_Y], width: LABEL_WIDTH, overflow: :shrink_to_fit
+        text_box I18n.t('activemodel.attributes.records_form.cleanup'), at: [LABEL_X, CLEANUP_Y], width: LABEL_WIDTH, overflow: :shrink_to_fit
+        text_box I18n.t('activemodel.attributes.records_form.remark'), at: [LABEL_X, REMARK_LABEL_Y], width: LABEL_WIDTH, overflow: :shrink_to_fit
         font "SourceHanSans" do
           [GETUP_Y, CLEANUP_Y].each do |y|
             draw_option_label(I18n.t('records.new.necessary'), OPTION_LABEL_NECESSARY, y)
@@ -106,7 +109,7 @@ module NotificationPdf
     end
 
     def draw_option_label(text, config, y)
-      text_box text, at: [config[:at][0], y], width: config[:width], align: :center
+      text_box text, at: [config[:at][0], y], width: config[:width], align: :center, overflow: :shrink_to_fit
     end
 
     def create_form(record)
@@ -143,24 +146,24 @@ module NotificationPdf
           if record.stamp.length == 1
             stroke_circle [16, 16], 13
             bounding_box([3, 29], width: 26, height: 26) do
-              text_box record.stamp.to_s, at: [4, 23], size: 18
+              text_box record.stamp.to_s, at: [4, 23], size: 18, overflow: :shrink_to_fit
             end
           elsif record.stamp.length == 2
             stroke_circle [16, 16], 16
             bounding_box([8, 32], width: 16, height: 32) do
-              text_box record.stamp.to_s, at: [0, 32], size: 16
+              text_box record.stamp.to_s, at: [0, 32], size: 16, overflow: :shrink_to_fit
             end
           elsif record.stamp.length == 3
             stroke_ellipse [12, 14], 12, 20
             bounding_box([6, 31], width: 12, height: 36) do
-              text_box record.stamp.to_s, at: [0, 37], size: 12
+              text_box record.stamp.to_s, at: [0, 37], size: 12, overflow: :shrink_to_fit
             end
           elsif record.stamp.length == 4
             stroke do
               rounded_rectangle [2, 45], 30, 30, 3
             end
             bounding_box([4, 35], width: 30, height: 30) do
-              text_box record.stamp.to_s, at: [1, 37], size: 13
+              text_box record.stamp.to_s, at: [1, 37], size: 13, overflow: :shrink_to_fit
             end
           else
             image Rails.root.join('app', 'assets', 'images', 'fingerprint.jpg').to_s, at: [10, 30], width: 20, height: 30
@@ -172,8 +175,8 @@ module NotificationPdf
 
     def create_footer
       font "SourceHanSans", style: :bold do
-        text_box I18n.t('records.new.create_footer1'), at: [LABEL_X, FOOTER_Y1], size: 10
-        text_box I18n.t('records.new.create_footer2'), at: [LABEL_X, FOOTER_Y2], size: 10
+        text_box I18n.t('records.new.create_footer1'), at: [LABEL_X, FOOTER_Y1], size: 10, width: bounds.width - LABEL_X * 2, overflow: :shrink_to_fit
+        text_box I18n.t('records.new.create_footer2'), at: [LABEL_X, FOOTER_Y2], size: 10, width: bounds.width - LABEL_X * 2, overflow: :shrink_to_fit
       end
     end
   end
