@@ -17,6 +17,7 @@ ja:
     error_500_title: "サーバーエラー"
     error_500_message: "申し訳ございません。サーバーでエラーが発生しました。"
     back_to_home: "トップページに戻る"
+    error_title: "入力に%{count}件のエラーがあります"
   records:
     new:
       title: "届け、反抗期"

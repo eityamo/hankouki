@@ -17,6 +17,7 @@ en:
     error_500_title: "Server error"
     error_500_message: "Sorry, something went wrong on our end."
     back_to_home: "Back to home"
+    error_title: "%{count} error(s) found"
   records:
     new:
       title: "LITTLE REBELLION"

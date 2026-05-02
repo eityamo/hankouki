@@ -17,6 +17,7 @@ zh:
     error_500_title: "服务器错误"
     error_500_message: "抱歉，服务器发生了错误。"
     back_to_home: "返回首页"
+    error_title: "输入中有%{count}个错误"
   records:
     new:
       title: "獨立宣言"
