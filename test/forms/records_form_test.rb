@@ -96,9 +96,10 @@ class RecordsFormTest < ActiveSupport::TestCase
     assert form.errors[:old].any?
   end
 
-  test "old が nil は許容される" do
+  test "old が nil は無効" do
     form = RecordsForm.new(valid_params.merge(old: nil))
-    assert form.valid?
+    assert_not form.valid?
+    assert form.errors[:old].any?
   end
 
   # --- remark バリデーション ---
