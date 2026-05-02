@@ -34,6 +34,7 @@ en:
       unnecessary: "unnecessary"
       consultation: "consultation"
       pdf: "PDF CREATION"
+      pdf_submitting: "GENERATING..."
       create_header: "I hereby declare that I will be rebellious for the following period."
       from: "(from)"
       to: "(to)"

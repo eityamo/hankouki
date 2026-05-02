@@ -33,7 +33,8 @@ ja:
       necessary: "要"
       unnecessary: "不要"
       consultation: "都度相談"
-      pdf: PDF生成
+      pdf: "PDF生成"
+      pdf_submitting: "生成中..."
       create_header: "私は下記の期間、反抗的な態度を取ることを届け出ます"
       from: "から"
       to: "まで"
