@@ -34,7 +34,7 @@
       <%= render 'shared/error_messages', object: f.object %>
       <div class="sm:col-span-2">
         <%= f.label :myname %>
-        <%= f.text_field :myname, placeholder: t('.name_placeholder'), maxlength: "10", class: form_input_class %>
+        <%= f.text_field :myname, placeholder: t('.name_placeholder'), maxlength: "10", required: true, class: form_input_class %>
       </div>
 
       <div class="inline-block relative w-48">
@@ -44,31 +44,31 @@
 
       <div class="inline-block relative w-48">
         <%= f.label :old %>
-        <%= f.number_field :old, in: 1..99, class: form_input_class %>
+        <%= f.number_field :old, in: 1..99, required: true, class: form_input_class %>
       </div>
 
       <div date-rangepicker, class="sm:col-span-2 flex flex-col">
         <%= f.label :fromdate %>
         <div class="flex">
-          <%= f.date_field :fromdate, class: form_date_class %>
+          <%= f.date_field :fromdate, required: true, class: form_date_class %>
         <span class="mx-4 text-gray-500 my-auto">〜</span>
-          <%= f.date_field :todate, class: form_date_class %>
+          <%= f.date_field :todate, required: true, class: form_date_class %>
         </div>
       </div>
 
       <div class="sm:col-span-2">
         <%= f.label :yourname %>
-        <%= f.text_field :yourname, placeholder: t('.name_placeholder'), maxlength: "10", class: form_input_class %>
+        <%= f.text_field :yourname, placeholder: t('.name_placeholder'), maxlength: "10", required: true, class: form_input_class %>
       </div>
 
       <div class="inline-block relative w-48">
         <%= f.label :getup %>
-        <%= f.select :getup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, class: form_select_class %>
+        <%= f.select :getup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class %>
       </div>
 
       <div class="inline-block relative w-48">
         <%= f.label :cleanup %>
-        <%= f.select :cleanup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, class: form_select_class %>
+        <%= f.select :cleanup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class %>
       </div>
 
       <div class="sm:col-span-2">
