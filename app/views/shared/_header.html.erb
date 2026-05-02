@@ -8,10 +8,14 @@
   <!-- logo - end -->
 
   <!-- nav - start -->
-  <nav class="hidden lg:flex gap-12">
-    <%= link_to t('defaults.english'), url_for(locale: :en), class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
-    <%= link_to t('defaults.chinese'), url_for(locale: :zh), class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
-    <%= link_to t('defaults.japanese'), url_for(locale: :ja), class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100" %>
+  <nav class="flex gap-3 md:gap-6">
+    <% { en: 'EN', zh: '中', ja: 'JP' }.each do |loc, label| %>
+      <% if I18n.locale == loc %>
+        <span class="text-indigo-600 text-sm md:text-lg font-bold border-b-2 border-indigo-500 pb-1"><%= label %></span>
+      <% else %>
+        <%= link_to label, url_for(locale: loc), class: "text-gray-500 hover:text-indigo-500 text-sm md:text-lg font-semibold transition duration-100" %>
+      <% end %>
+    <% end %>
   </nav>
   <!-- nav - end -->
 </header>

@@ -15,35 +15,43 @@ class NotificationPdf::PostPdfTest < ActiveSupport::TestCase
     }.merge(overrides))
   end
 
+  # クラスレベルでキャッシュし、フォント読み込みの繰り返しを回避
+  def self.standard_pdf_output
+    @standard_pdf_output ||= begin
+      record = RecordsForm.new(
+        myname: "太郎", stamp: "山田", old: 12,
+        fromdate: Date.new(2026, 4, 1), todate: Date.new(2026, 4, 30),
+        yourname: "お母さん", getup: "necessary", cleanup: "unnecessary",
+        remark: "よろしく"
+      )
+      NotificationPdf::PostPdf.new(record).render
+    end
+  end
+
   # --- PDF生成の基本 ---
 
   test "render で有効な PDF バイナリが返る" do
-    pdf = NotificationPdf::PostPdf.new(build_record)
-    output = pdf.render
+    output = self.class.standard_pdf_output
     assert output.start_with?("%PDF"), "PDF ヘッダーが見つかりません"
     assert output.length > 0
   end
 
   test "render の戻り値は String" do
-    pdf = NotificationPdf::PostPdf.new(build_record)
-    assert_instance_of String, pdf.render
+    assert_instance_of String, self.class.standard_pdf_output
   end
 
   # --- 印鑑のバリエーション ---
 
-  test "stamp 1文字で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(stamp: "山"))
-    assert pdf.render.start_with?("%PDF")
-  end
-
-  test "stamp 2文字で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(stamp: "山田"))
-    assert pdf.render.start_with?("%PDF")
-  end
-
-  test "stamp 3文字で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(stamp: "山田太"))
-    assert pdf.render.start_with?("%PDF")
+  test "stamp 各文字数で PDF 生成成功" do
+    [
+      ["山", "1文字"],
+      ["山田", "2文字"],
+      ["山田太", "3文字"],
+      ["", "空文字（指紋画像使用）"],
+    ].each do |stamp_value, label|
+      pdf = NotificationPdf::PostPdf.new(build_record(stamp: stamp_value))
+      assert pdf.render.start_with?("%PDF"), "stamp #{label}で失敗"
+    end
   end
 
   test "stamp 4文字で PDF 生成成功（vertical_stamp 適用後）" do
@@ -53,41 +61,20 @@ class NotificationPdf::PostPdfTest < ActiveSupport::TestCase
     assert pdf.render.start_with?("%PDF")
   end
 
-  test "stamp 空文字で PDF 生成成功（指紋画像使用）" do
-    pdf = NotificationPdf::PostPdf.new(build_record(stamp: ""))
-    assert pdf.render.start_with?("%PDF")
-  end
-
   # --- getup / cleanup のバリエーション ---
 
-  test "getup が 'necessary' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(getup: "necessary"))
-    assert pdf.render.start_with?("%PDF")
+  test "getup の全選択肢で PDF 生成成功" do
+    %w[necessary unnecessary consultation].each do |value|
+      pdf = NotificationPdf::PostPdf.new(build_record(getup: value))
+      assert pdf.render.start_with?("%PDF"), "getup=#{value} で失敗"
+    end
   end
 
-  test "getup が 'unnecessary' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(getup: "unnecessary"))
-    assert pdf.render.start_with?("%PDF")
-  end
-
-  test "getup が 'consultation' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(getup: "consultation"))
-    assert pdf.render.start_with?("%PDF")
-  end
-
-  test "cleanup が 'necessary' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "necessary"))
-    assert pdf.render.start_with?("%PDF")
-  end
-
-  test "cleanup が 'unnecessary' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "unnecessary"))
-    assert pdf.render.start_with?("%PDF")
-  end
-
-  test "cleanup が 'consultation' で PDF 生成成功" do
-    pdf = NotificationPdf::PostPdf.new(build_record(cleanup: "consultation"))
-    assert pdf.render.start_with?("%PDF")
+  test "cleanup の全選択肢で PDF 生成成功" do
+    %w[necessary unnecessary consultation].each do |value|
+      pdf = NotificationPdf::PostPdf.new(build_record(cleanup: value))
+      assert pdf.render.start_with?("%PDF"), "cleanup=#{value} で失敗"
+    end
   end
 
   # --- 多言語 ---

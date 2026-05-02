@@ -5,6 +5,18 @@ module ApplicationHelper
     page_title.empty? ? base_title : page_title + " | " + base_title
   end
 
+  def form_input_class
+    "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  end
+
+  def form_date_class
+    "text-center #{form_input_class} md:w-auto"
+  end
+
+  def form_select_class
+    "text-center #{form_input_class}"
+  end
+
   def default_meta_tags
     {
       site: I18n.t('defaults.site'),

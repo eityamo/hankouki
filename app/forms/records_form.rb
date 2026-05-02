@@ -17,11 +17,15 @@ class RecordsForm
   attribute :getup, :string
   attribute :cleanup, :string
 
-  validates :myname, { length: { maximum: 10 } }
-  validates :stamp, { length: { maximum: 4 } }
-  validates :yourname, { length: { maximum: 10 } }
-  validates :old, numericality: { only_integer: true, in: 1..99, allow_nil: true }
-  validates :remark, { length: { maximum: 131 } }
+  validates :myname, presence: true, length: { maximum: 10 }
+  validates :stamp, length: { maximum: 4 }
+  validates :yourname, presence: true, length: { maximum: 10 }
+  validates :old, presence: true, numericality: { only_integer: true, in: 1..99 }
+  validates :fromdate, presence: true
+  validates :todate, presence: true
+  validates :getup, presence: true
+  validates :cleanup, presence: true
+  validates :remark, length: { maximum: 131 }
   validate :start_end_check
 
   def start_end_check

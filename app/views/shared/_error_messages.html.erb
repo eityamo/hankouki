@@ -1,9 +1,10 @@
 <% if object.errors.any? %>
-<div class="sm:col-span-2 bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 w-full" role="alert">
-    <ul class="text-sm">
-        <% object.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-    </ul>
+<div class="sm:col-span-2 bg-red-50 border border-red-300 text-red-700 rounded-lg px-4 py-3 w-full" role="alert">
+	<p class="font-bold text-sm mb-1"><%= t('defaults.error_title', count: object.errors.count) %></p>
+	<ul class="text-sm list-disc list-inside">
+		<% object.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
 </div>
 <% end %>

@@ -12,6 +12,12 @@ ja:
     twitter: "開発者Twitter"
     facebook: "開発者 Facebook"
     pdf_error: "PDF の生成に失敗しました。もう一度お試しください。"
+    error_404_title: "ページが見つかりません"
+    error_404_message: "お探しのページは存在しないか、移動された可能性があります。"
+    error_500_title: "サーバーエラー"
+    error_500_message: "申し訳ございません。サーバーでエラーが発生しました。"
+    back_to_home: "トップページに戻る"
+    error_title: "入力に%{count}件のエラーがあります"
   records:
     new:
       title: "届け、反抗期"
@@ -27,7 +33,8 @@ ja:
       necessary: "要"
       unnecessary: "不要"
       consultation: "都度相談"
-      pdf: PDF生成
+      pdf: "PDF生成"
+      pdf_submitting: "生成中..."
       create_header: "私は下記の期間、反抗的な態度を取ることを届け出ます"
       from: "から"
       to: "まで"

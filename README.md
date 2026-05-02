@@ -12,7 +12,7 @@
 - Turbo（turbo-rails）
 - SQLite3（開発・テスト） / PostgreSQL（本番）
 - PDF生成: Prawn / Prawn-Table
-- デプロイ: Heroku（Docker）
+- デプロイ: Cloudflare（Docker）
 
 ## 必要な環境
 
@@ -59,10 +59,7 @@ http://localhost:3000 でアクセスできます。
 bin/rails test
 ```
 
-## デプロイ（Heroku）
+## デプロイ（Cloudflare）
 
-```bash
-git push heroku main
-```
-
-`Dockerfile` / `entrypoint.sh` は Heroku デプロイ専用です。ローカル開発では Docker は使用しません。
+`Dockerfile` / `entrypoint.sh` を使用して Docker コンテナとしてデプロイします。
+ローカル開発では Docker は使用しません。

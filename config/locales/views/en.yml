@@ -12,6 +12,12 @@ en:
     twitter: "Developer Twitter"
     facebook: "Developer Facebook"
     pdf_error: "Failed to generate PDF. Please try again."
+    error_404_title: "Page not found"
+    error_404_message: "The page you were looking for doesn't exist or may have been moved."
+    error_500_title: "Server error"
+    error_500_message: "Sorry, something went wrong on our end."
+    back_to_home: "Back to home"
+    error_title: "%{count} error(s) found"
   records:
     new:
       title: "LITTLE REBELLION"
@@ -28,6 +34,7 @@ en:
       unnecessary: "unnecessary"
       consultation: "consultation"
       pdf: "PDF CREATION"
+      pdf_submitting: "GENERATING..."
       create_header: "I hereby declare that I will be rebellious for the following period."
       from: "(from)"
       to: "(to)"
