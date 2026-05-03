@@ -1,8 +1,8 @@
 <header class="flex justify-between items-center py-4 md:py-8">
   <!-- logo - start -->
-  <%= link_to root_path, class: "title inline-flex items-center text-black-800 text-2xl md:text-3xl font-bold gap-2.5" do %>
-    <%= image_tag 'children_crossing.png', alt: t('defaults.site'), class: 'h-12 w-12 cursor-pointer mx-2' %>
-    <%= t 'records.new.title' %>
+  <%= link_to root_path, class: "title inline-flex items-center text-black-800 text-2xl md:text-3xl font-bold gap-2.5 min-w-0 overflow-hidden" do %>
+    <%= image_tag 'children_crossing.png', alt: t('defaults.site'), class: 'h-12 w-12 cursor-pointer mx-2 shrink-0' %>
+    <span class="truncate"><%= t 'records.new.title' %></span>
   <% end %>
 
   <!-- logo - end -->

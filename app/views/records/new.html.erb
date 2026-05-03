@@ -37,21 +37,21 @@
         <%= f.text_field :myname, placeholder: t('.name_placeholder'), maxlength: "10", required: true, class: form_input_class %>
       </div>
 
-      <div class="inline-block relative w-48">
+      <div class="w-full sm:w-48">
         <%= f.label :stamp %>
         <%= f.text_field :stamp, placeholder: t('.stamp_placeholder'), maxlength: "4", class: form_input_class %>
       </div>
 
-      <div class="inline-block relative w-48">
+      <div class="w-full sm:w-48">
         <%= f.label :old %>
         <%= f.number_field :old, in: 1..99, required: true, class: form_input_class %>
       </div>
 
       <div date-rangepicker, class="sm:col-span-2 flex flex-col">
         <%= f.label :fromdate %>
-        <div class="flex">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
           <%= f.date_field :fromdate, required: true, class: form_date_class %>
-        <span class="mx-4 text-gray-500 my-auto">〜</span>
+        <span class="my-2 sm:my-0 sm:mx-4 text-gray-500">〜</span>
           <%= f.date_field :todate, required: true, class: form_date_class %>
         </div>
       </div>
@@ -61,12 +61,12 @@
         <%= f.text_field :yourname, placeholder: t('.name_placeholder'), maxlength: "10", required: true, class: form_input_class %>
       </div>
 
-      <div class="inline-block relative w-48">
+      <div class="w-full sm:w-48">
         <%= f.label :getup %>
         <%= f.select :getup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class %>
       </div>
 
-      <div class="inline-block relative w-48">
+      <div class="w-full sm:w-48">
         <%= f.label :cleanup %>
         <%= f.select :cleanup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class %>
       </div>
