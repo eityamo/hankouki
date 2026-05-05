@@ -9,10 +9,10 @@
             <%= link_to t("defaults.privacy"), privacy_policy_path, class: "mr-4 hover:underline md:mr-6" %>
         </li>
         <li>
-            <%= link_to t("defaults.twitter"), 'https://twitter.com/eityamo', class: "mr-4 hover:underline md:mr-6", target: "_blank", rel: "noopener noreferrer" %>
+            <%= link_to t("defaults.twitter"), Rails.application.config.x.site.twitter_url, class: "mr-4 hover:underline md:mr-6", target: "_blank", rel: "noopener noreferrer" %>
         </li>
         <li>
-            <%= link_to t("defaults.facebook"), 'https://www.facebook.com/eiji.yukihiro.1', class: "mr-4 hover:underline md:mr-6", target: "_blank", rel: "noopener noreferrer" %>
+            <%= link_to t("defaults.facebook"), Rails.application.config.x.site.facebook_url, class: "mr-4 hover:underline md:mr-6", target: "_blank", rel: "noopener noreferrer" %>
         </li>
     </ul>
 </footer>
