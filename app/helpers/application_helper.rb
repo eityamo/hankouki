@@ -39,7 +39,7 @@ module ApplicationHelper
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@eityamo',
+        site: Rails.application.config.x.site.twitter_handle,
       }
     }
   end

@@ -2,7 +2,10 @@
 
 <section class="flex justify-center items-center flex-1 shrink-0 bg-gray-100 overflow-hidden shadow-lg rounded-lg relative py-12 md:py-12 xl:py-24">
   <!-- image - start -->
-  <%= image_tag 'top4.png', alt: t('.hero_alt'), class: "w-full h-full object-cover object-center absolute inset-0" %>
+  <picture>
+    <source srcset="<%= image_path('top4.webp') %>" type="image/webp">
+    <%= image_tag 'top4.png', alt: t('.hero_alt'), class: "w-full h-full object-cover object-center absolute inset-0" %>
+  </picture>
   <!-- image - end -->
 
   <!-- overlay - start -->
@@ -63,12 +66,14 @@
 
       <div class="w-full sm:w-48">
         <%= f.label :getup %>
-        <%= f.select :getup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class %>
+        <%= f.select :getup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class, aria: { describedby: "getup-hint" } %>
+        <span id="getup-hint" class="sr-only"><%= t('.select_placeholder') %></span>
       </div>
 
       <div class="w-full sm:w-48">
         <%= f.label :cleanup %>
-        <%= f.select :cleanup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class %>
+        <%= f.select :cleanup, [[t('.necessary'), 'necessary'], [t('.unnecessary'), 'unnecessary'], [t('.consultation'), 'consultation']], { include_blank: t('.select_placeholder') }, required: true, class: form_select_class, aria: { describedby: "cleanup-hint" } %>
+        <span id="cleanup-hint" class="sr-only"><%= t('.select_placeholder') %></span>
       </div>
 
       <div class="sm:col-span-2">

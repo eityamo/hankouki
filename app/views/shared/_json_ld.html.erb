@@ -1,0 +1,17 @@
+<script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "<%= t('defaults.site') %>",
+  "description": "<%= t('defaults.description') %>",
+  "url": "<%= request.base_url %>",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "inLanguage": ["ja", "en", "zh"]
+}
+</script>

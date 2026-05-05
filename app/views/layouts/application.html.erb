@@ -6,8 +6,11 @@
 
     <title><%= full_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= render 'shared/json_ld' %>
 
     <%= stylesheet_link_tag 'tailwind', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
