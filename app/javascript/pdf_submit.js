@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = form.querySelector("input[type=submit]");
     if (!button) return;
 
+    const timeout = parseInt(form.dataset.pdfTimeout, 10) || 10000;
+
     button.disabled = true;
     button.value = button.dataset.submitting || "...";
     button.classList.add("opacity-50", "cursor-not-allowed");
@@ -15,6 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       button.disabled = false;
       button.value = button.dataset.original;
       button.classList.remove("opacity-50", "cursor-not-allowed");
-    }, 10000);
+    }, timeout);
   });
 });
