@@ -12,7 +12,6 @@ gem 'turbo-rails'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :windows]
   gem 'sqlite3', '~> 2.0'
   gem 'dotenv-rails'
 end
@@ -23,10 +22,6 @@ group :development do
   gem 'pry-rails'
 end
 
-group :test do
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
-end
 
 group :production do
   gem 'pg'
